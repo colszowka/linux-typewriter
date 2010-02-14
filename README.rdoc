@@ -1,0 +1,29 @@
+= Linux Typewriter
+
+If you want to make some kind of screencast that features keyboard typing sounds,
+this might come in handy. Get the script, run linux-typewriter.rb and pump up your volume.
+
+This is totally hacked-away, but it works for me. Your mileage may vary, though.
+
+== Requirements
+
+* Python, Ruby, Rubygems
+* <code>python-xlib</code> (On Debian-based, install with <code>sudo apt-get install python-xlib)</code>
+* aplay command line player, but you really can dump in anything you want, see <code>linux-typewriter.rb</code>
+* <code>sinatra</code> (<code>sudo gem install sinatra)</code>
+
+== Why this weird threading architecture with sinatra and python and stuff?
+
+Simple: The <code>aplay</code> command is too slow when used directly from <code>keypress.py</code>,
+locking the process for a while. I am no python genius and have no idea how to establish a thread,
+and I do not care. It now makes a webrequest to the running sinatra app, which launches aplay in
+a separate thread, thus not locking the keypress listener anymore.
+
+== Copyrights
+
+keypress.py by Sayan "Riju" Chakrabarti, Released under WTFPL Version 2
+http://rants.sayanriju.co.cc/script-to-make-tick-tick-sound-on-keypress
+- Modifications by Christoph Olszowka
+
+Keypress sounds extracted from 'keyboard-typing' by Anton at Freesound,
+http://www.freesound.org/samplesViewSingle.php?id=137
